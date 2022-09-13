@@ -61,12 +61,11 @@ router.get("/reviews", async (req, res) => {
   }
 });
 
-router.get("/baldata/:user", async (req, res) => {
-  const user = req.params.user;
-  console.log(user);
+router.get("/get-vendorPorudct", async (req, res) => {
   try {
-    const bal = await Product.find({ user });
-    res.send(bal);
+    const user = req.query.user;
+    const product = await Product.find({ user });
+    res.send(product);
   } catch (err) {
     res.json({
       message: err.message,
