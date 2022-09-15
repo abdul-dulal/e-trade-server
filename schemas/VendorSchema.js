@@ -9,6 +9,15 @@ const vendorSchema = Schema({
   img: {
     type: String,
   },
+  status: {
+    type: String,
+  },
+  user: {
+    type: String,
+  },
+  follower: {
+    type: Number,
+  },
 });
 
 module.exports = vendorSchema;

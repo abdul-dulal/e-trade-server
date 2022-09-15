@@ -73,4 +73,36 @@ router.get("/get-vendorPorudct", async (req, res) => {
   }
 });
 
+router.get("/getProuduct-byUser", async (req, res) => {
+  const email = req.query.email;
+  console.log(email);
+  try {
+    const product = await Product.find({ email });
+    res.send(product);
+  } catch (err) {
+    res.json({ message: err.message });
+  }
+});
+
+router.delete("/delete-product/:id", async (req, res) => {
+  try {
+    const remove = await Product.findByIdAndDelete({ _id: req.params.id });
+  } catch (err) {
+    res.json({
+      message: err.message,
+    });
+  }
+});
+
+router.get("/edit-product/:id", async (req, res) => {
+  try {
+    const result = await Product.findById({ _id: req.params.id });
+    res.send(result);
+  } catch (err) {
+    res.json({
+      message: er.message,
+    });
+  }
+});
+
 module.exports = router;

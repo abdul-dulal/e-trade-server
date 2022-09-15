@@ -6,6 +6,7 @@ const handleVendor = require("./routes/VendorRoute");
 const handleCart = require("./routes/CartRoute");
 const handleWishlist = require("./routes/WishlistRoute");
 const hadnleReview = require("./routes/ReviewRoute");
+const handleUser = require("./routes/UserRoute");
 require("dotenv").config();
 const app = express();
 app.use(express.json());
@@ -35,6 +36,8 @@ app.use("/wishlist", handleWishlist);
 
 // reivew
 app.use("/review", hadnleReview);
+// user
+app.use("/user", handleUser);
 
 app.get("/", (req, res) => {
   res.send("hello from eTrade");

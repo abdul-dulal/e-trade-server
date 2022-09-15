@@ -23,6 +23,9 @@ const productSchema = Schema({
   highlights: {
     type: String,
   },
+  user: {
+    type: String,
+  },
   tags: {
     type: String,
   },
