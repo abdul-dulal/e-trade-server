@@ -100,7 +100,7 @@ router.get("/edit-product/:id", async (req, res) => {
     res.send(result);
   } catch (err) {
     res.json({
-      message: er.message,
+      message: err.message,
     });
   }
 });

@@ -30,7 +30,6 @@ router.get("/get-cartItems", async (req, res) => {
 
 router.delete("/deleteCart-item/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id);
   try {
     const item = await Cart.findByIdAndDelete({ _id: id });
     res.send(item);
