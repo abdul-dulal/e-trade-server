@@ -16,6 +16,19 @@ router.post("/product", async (req, res) => {
   }
 });
 
+// all product
+
+router.get("/allproduct", async (req, res) => {
+  try {
+    const result = await Product.find({});
+    res.send(result);
+  } catch (err) {
+    res.json({
+      message: err.message,
+    });
+  }
+});
+
 router.get("/get-Bycategory", async (req, res) => {
   try {
     const category = req.query.category;
