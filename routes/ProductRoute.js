@@ -118,4 +118,49 @@ router.get("/edit-product/:id", async (req, res) => {
   }
 });
 
+// seacrh
+
+router.get("/search/:title", async (req, res) => {
+  try {
+    var regxp = new RegExp(req.params.title, "i");
+
+    const result = await Product.find({ title: regxp });
+    res.send(result);
+  } catch (err) {
+    message: err.message;
+  }
+});
+
+router.get("/get_default", async (req, res) => {
+  try {
+    const result = await Product.find({ price: { $gt: 20 } });
+    res.send(result);
+  } catch (err) {
+    message: err.message;
+  }
+});
+
+router.put("/update_product/:id", async (req, res) => {
+  const product = req.body;
+  try {
+    const result = await Product.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          title: product.title,
+          img: product.img,
+          price: product.price,
+          price2: product.price2,
+          category: product.category,
+          tags: product.tags,
+        },
+      }
+    );
+
+    res.send(result);
+  } catch (err) {
+    message: err.message;
+  }
+});
+
 module.exports = router;

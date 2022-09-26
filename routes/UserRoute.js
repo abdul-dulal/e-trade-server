@@ -13,6 +13,15 @@ router.post("/post-userInfo", async (req, res) => {
   }
 });
 
+router.get("/get_userInfo/:email", async (req, res) => {
+  try {
+    const userInfo = await User.findOne({ user: req.params.email });
+    res.send(userInfo);
+  } catch (err) {
+    message: err.message;
+  }
+});
+
 router.put("/put-userInfo/:user", async (req, res) => {
   const data = req.body;
   try {

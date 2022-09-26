@@ -79,10 +79,9 @@ router.get("/user/:user", async (req, res) => {
 });
 router.put("/update-vendorInfo/:user", async (req, res) => {
   const data = req.body;
-
   try {
     const updateVendor = await Vendor.findOneAndUpdate(
-      { email: req.params.user },
+      { user: req.params.user },
       {
         $set: {
           name: data.name,
@@ -90,6 +89,7 @@ router.put("/update-vendorInfo/:user", async (req, res) => {
         },
       }
     );
+
     res.send(updateVendor);
   } catch (err) {
     res.json({
