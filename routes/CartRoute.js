@@ -4,11 +4,21 @@ const cartSchema = require("../schemas/CartSchema");
 const Cart = mongoose.model("Cart", cartSchema);
 
 router.post("/postCart", async (req, res) => {
-  try {
-    const cart = new Cart(req.body);
-    await cart.save();
+  const cartItem = req.body;
 
-    res.send("success");
+  try {
+    const query = {
+      name: cartItem.name,
+      user: cartItem.user,
+    };
+    const exist = await Cart.findOne(query);
+    if (exist) {
+      return res.send({ success: false, exist });
+    } else {
+      const cart = new Cart(req.body);
+      await cart.save();
+      res.send({ success: true, exist });
+    }
   } catch (err) {
     res.json({
       message: err.message,
